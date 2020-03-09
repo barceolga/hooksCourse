@@ -1,6 +1,6 @@
 import ImageToggleOnScroll from "./ImageToggleOnScroll";
-
-const SpeakerDetail = ({
+// We wrap up the whole component in React.memo in order to be able to use the useCallback hook to only render the changed portion of code
+const SpeakerDetail = React.memo( ({
                            id,
                            firstName,
                            lastName,
@@ -8,6 +8,9 @@ const SpeakerDetail = ({
                            bio,
                            onHeartFavoriteHandler
                        }) => {
+    //The console.log at the end of this comment is used for checking which speaker value is rerendered after selecting him/her as favorite or unfavorite. 
+    // Due to wrapping up the whole compoment SpeakerDetail in React.memo and applying useCallback hook in Spekers.js in HeartFavoriteHandler method, only the updated 
+    // speaker is rerendered, the others are brought as cached (memoized) and not rerendered at all. That improves app performance.
     //console.log(`SpeakerDetail:${id} ${firstName} ${lastName} ${favorite}`);
     return (
         <div className="card col-4 cardmin">
@@ -35,6 +38,6 @@ const SpeakerDetail = ({
             </div>
         </div>
     );
-};
+});
 
 export default SpeakerDetail;
